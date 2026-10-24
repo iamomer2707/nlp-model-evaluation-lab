@@ -1,0 +1,226 @@
+{
+  "title": "SMS Spam Collection benchmark",
+  "dataset": "SMS Spam Collection",
+  "messages": 5574,
+  "ham": 4827,
+  "spam": 747,
+  "split": {
+    "method": "stratified",
+    "seed": 42,
+    "train": 3901,
+    "validation": 836,
+    "test": 837,
+    "test_ham": 725,
+    "test_spam": 112
+  },
+  "hardware": "Google Colab NVIDIA T4 GPU (one observed run)",
+  "models": [
+    {
+      "name": "RNN",
+      "family": "from_scratch",
+      "accuracy": 0.951015531660693,
+      "precision": 0.8514851485148515,
+      "recall": 0.7678571428571429,
+      "f1": 0.8075117370892019,
+      "parameters": 470082,
+      "training_seconds": 6.384422213999983,
+      "inference_seconds": 0.043175300999962474,
+      "confusion_matrix": [
+        [
+          710,
+          15
+        ],
+        [
+          26,
+          86
+        ]
+      ]
+    },
+    {
+      "name": "LSTM",
+      "family": "from_scratch",
+      "accuracy": 0.966547192353644,
+      "precision": 0.8962264150943396,
+      "recall": 0.8482142857142857,
+      "f1": 0.8715596330275229,
+      "parameters": 495042,
+      "training_seconds": 3.005800373999989,
+      "inference_seconds": 0.025615351999988434,
+      "confusion_matrix": [
+        [
+          714,
+          11
+        ],
+        [
+          17,
+          95
+        ]
+      ]
+    },
+    {
+      "name": "LSTM + Attention",
+      "family": "from_scratch",
+      "accuracy": 0.9713261648745519,
+      "precision": 0.9230769230769231,
+      "recall": 0.8571428571428571,
+      "f1": 0.8888888888888888,
+      "parameters": 495106,
+      "training_seconds": 2.895256485999994,
+      "inference_seconds": 0.017710188000023663,
+      "confusion_matrix": [
+        [
+          717,
+          8
+        ],
+        [
+          16,
+          96
+        ]
+      ]
+    },
+    {
+      "name": "Transformer",
+      "family": "from_scratch",
+      "accuracy": 0.973715651135006,
+      "precision": 0.9891304347826086,
+      "recall": 0.8125,
+      "f1": 0.8921568627450981,
+      "parameters": 535106,
+      "training_seconds": 4.905695784999978,
+      "inference_seconds": 0.02689868900000647,
+      "confusion_matrix": [
+        [
+          724,
+          1
+        ],
+        [
+          21,
+          91
+        ]
+      ]
+    },
+    {
+      "name": "DistilBERT",
+      "family": "pretrained_finetuned",
+      "accuracy": 0.991636798088411,
+      "precision": 0.972972972972973,
+      "recall": 0.9642857142857143,
+      "f1": 0.968609865470852,
+      "parameters": 66955010,
+      "training_seconds": 179.97522375099993,
+      "inference_seconds": 3.100446034000015,
+      "confusion_matrix": [
+        [
+          722,
+          3
+        ],
+        [
+          4,
+          108
+        ]
+      ]
+    },
+    {
+      "name": "BERT",
+      "family": "pretrained_finetuned",
+      "accuracy": 0.991636798088411,
+      "precision": 0.9487179487179487,
+      "recall": 0.9910714285714286,
+      "f1": 0.9694323144104804,
+      "parameters": 109483778,
+      "training_seconds": 283.24591440000006,
+      "inference_seconds": 6.451295828999946,
+      "confusion_matrix": [
+        [
+          719,
+          6
+        ],
+        [
+          1,
+          111
+        ]
+      ]
+    },
+    {
+      "name": "RoBERTa",
+      "family": "pretrained_finetuned",
+      "accuracy": 0.995221027479092,
+      "precision": 0.9736842105263158,
+      "recall": 0.9910714285714286,
+      "f1": 0.9823008849557522,
+      "parameters": 124647170,
+      "training_seconds": 383.87649185600003,
+      "inference_seconds": 5.783000121999976,
+      "confusion_matrix": [
+        [
+          722,
+          3
+        ],
+        [
+          1,
+          111
+        ]
+      ]
+    },
+    {
+      "name": "MiniLM",
+      "family": "pretrained_finetuned",
+      "accuracy": 0.995221027479092,
+      "precision": 0.9821428571428571,
+      "recall": 0.9821428571428571,
+      "f1": 0.9821428571428571,
+      "parameters": 33360770,
+      "training_seconds": 122.44051356,
+      "inference_seconds": 1.8681723459999375,
+      "confusion_matrix": [
+        [
+          723,
+          2
+        ],
+        [
+          2,
+          110
+        ]
+      ]
+    }
+  ],
+  "assignment2_historical": [
+    {
+      "name": "RNN",
+      "accuracy": 0.9210762331838565,
+      "precision": 0.6380090497737556,
+      "recall": 0.9463087248322147,
+      "f1": 0.7621621621621621,
+      "training_seconds": 1.480581040999823
+    },
+    {
+      "name": "LSTM",
+      "accuracy": 0.9730941704035875,
+      "precision": 0.9219858156028369,
+      "recall": 0.87248322147651,
+      "f1": 0.896551724137931,
+      "training_seconds": 2.715169541999785
+    },
+    {
+      "name": "LSTM + Attention",
+      "accuracy": 0.95695067264574,
+      "precision": 0.7759562841530054,
+      "recall": 0.9530201342281879,
+      "f1": 0.8554216867469879,
+      "training_seconds": 5.188917416999175
+    },
+    {
+      "name": "Transformer",
+      "accuracy": 0.9533632286995516,
+      "precision": 0.793939393939394,
+      "recall": 0.8791946308724832,
+      "f1": 0.8343949044585988,
+      "training_seconds": 17.500974000002316
+    }
+  ],
+  "limitations": [
+    "One stratified split and one seed.",
+    "Observed Colab T4 runtimes are single-run measurements.",
+    "SMS Spam Collection is an older English-language dataset."
+  ]
+}

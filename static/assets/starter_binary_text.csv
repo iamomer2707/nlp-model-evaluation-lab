@@ -1,0 +1,25 @@
+text,label
+"Can you send me the notes from today's meeting?",ham
+"I am running ten minutes late, please start without me.",ham
+"The package arrived at the front desk this morning.",ham
+"Thanks for helping with the presentation yesterday.",ham
+"Let's move our call to Thursday afternoon.",ham
+"I left the book on your desk before lunch.",ham
+"Are you still coming to the study group tonight?",ham
+"The train is delayed, I will message when I arrive.",ham
+"Please review the updated schedule when you have time.",ham
+"I will bring snacks for everyone tomorrow.",ham
+"Your appointment is confirmed for 2:30 PM.",ham
+"Happy birthday! Hope you have a relaxing weekend.",ham
+"Claim your exclusive reward now, offer expires tonight!",spam
+"You have been selected for a free gift. Reply YES to claim.",spam
+"Congratulations, you won a shopping voucher. Click to redeem.",spam
+"Limited-time deal: get 70% off when you order today.",spam
+"Your account has a security issue. Verify your details at this link.",spam
+"Earn extra income from home with no experience required.",spam
+"Final notice: collect your cash prize before it is too late.",spam
+"Free trial available now. Subscribe today to unlock every feature.",spam
+"You are our lucky winner. Call now to receive your reward.",spam
+"Special promotion just for you. Text JOIN to activate your offer.",spam
+"Urgent: confirm your payment information to avoid account closure.",spam
+"Buy one, get one free. This deal ends at midnight.",spam

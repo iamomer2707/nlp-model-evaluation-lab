@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b13">
+  <meta name="description" content="An interactive NLP evaluation lab for SMS spam detection and your own binary text datasets.">
+  <title>Signal Lab — NLP Model Evaluation</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#top" aria-label="Signal Lab home">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span><strong>SIGNAL</strong><small>MODEL LAB / 01</small></span>
+      </a>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#overview"><span class="nav-icon">◈</span> Overview</a>
+        <a class="nav-link" href="#sandbox"><span class="nav-icon">⌁</span> Live sandbox</a>
+        <a class="nav-link" href="#benchmarks"><span class="nav-icon">▥</span> Benchmarks</a>
+        <a class="nav-link" href="#your-data"><span class="nav-icon">＋</span> Your dataset</a>
+      </nav>
+      <div class="sidebar-spacer"></div>
+      <div class="side-card">
+        <div class="side-card-top"><span class="pulse-dot"></span> LOCAL INFERENCE</div>
+        <p>Text is processed by the server you run. Messages and uploaded CSVs are not saved.</p>
+      </div>
+      <div class="side-footer"><span class="tiny-square"></span> BUILD 1.0.0 <span>·</span> OPEN LAB</div>
+    </aside>
+
+    <main class="main-content" id="top">
+      <header class="topbar">
+        <div class="breadcrumb"><span>WORKSPACE</span><b>/</b><strong>SMS SPAM EVALUATION</strong></div>
+        <div class="topbar-right">
+          <span class="runtime-chip"><span class="status-dot" id="api-dot"></span><span id="api-status">CONNECTING</span></span>
+          <span class="date-chip">SEED&nbsp; 42</span>
+        </div>
+      </header>
+
+      <section class="hero" id="overview">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> NLP EVALUATION / CONTROL ROOM</div>
+          <h1>Read the signal.<br><em>Measure the model.</em></h1>
+          <p>Probe a live text classifier, compare fine-tuned Transformers, or bring a labeled dataset and run a fresh evaluation.</p>
+          <a class="hero-link" href="#sandbox">OPEN LIVE SANDBOX <span>↘</span></a>
+        </div>
+        <div class="hero-graphic" aria-hidden="true">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div>
+          <div class="core"><span class="core-inner"></span><span class="core-cross">✳</span></div>
+          <span class="orbit-label label-a">TOKEN / 128</span><span class="orbit-label label-b">SIGNAL ACTIVE</span>
+          <span class="orbit-label label-c">BINARY CLASSIFIER</span>
+        </div>
+      </section>
+
+      <section class="metric-strip" aria-label="Experiment overview">
+        <article class="metric-card"><div class="metric-top"><span>MESSAGES ANALYZED</span><span class="metric-index">01</span></div><strong id="dataset-count">5,574</strong><small>SMS SPAM COLLECTION</small><div class="metric-rule"><i style="width:72%"></i></div></article>
+        <article class="metric-card"><div class="metric-top"><span>TOP TEST ACCURACY</span><span class="metric-index">02</span></div><strong id="top-accuracy">99.52<span class="unit">%</span></strong><small id="top-accuracy-model">ROBERTA / MINILM</small><div class="metric-rule cyan"><i style="width:99.52%"></i></div></article>
+        <article class="metric-card"><div class="metric-top"><span>BEST SPAM F1</span><span class="metric-index">03</span></div><strong id="top-f1">98.23<span class="unit">%</span></strong><small id="top-f1-model">ROBERTA</small><div class="metric-rule violet"><i style="width:98.23%"></i></div></article>
+        <article class="metric-card highlight-card"><div class="metric-top"><span>LIGHTWEIGHT PICK</span><span class="metric-index">04</span></div><strong>33.36<span class="unit">M</span></strong><small>MINILM PARAMETERS · 98.21% SPAM F1</small><div class="metric-rule lime"><i style="width:36%"></i></div></article>
+      </section>
+
+      <section class="section-block" id="sandbox">
+        <div class="section-heading">
+          <div><div class="eyebrow"><span class="eyebrow-line"></span> INTERACTIVE / 01</div><h2>Live message sandbox</h2></div>
+          <span class="section-note"><span class="pulse-dot"></span> TF-IDF + LOGISTIC REGRESSION</span>
+        </div>
+        <div class="sandbox-grid">
+          <div class="panel input-panel">
+            <div class="panel-head"><div><span class="panel-kicker">INPUT STREAM</span><h3>Test a message</h3></div><span class="panel-icon">✳</span></div>
+            <label class="sr-only" for="message-input">Message text</label>
+            <textarea id="message-input" maxlength="3000" placeholder="Paste a message here…&#10;&#10;Try an offer, a conversation, or something ambiguous."></textarea>
+            <div class="input-meta"><span>TEXT CLASSIFICATION / ENGLISH</span><span id="char-count">0 / 3,000</span></div>
+            <div class="sample-row">
+              <button class="sample-chip" data-sample="Congratulations! You have won a free prize. Call now to claim before midnight!">Load promo sample <span>↗</span></button>
+              <button class="sample-chip" data-sample="Hey, are we still meeting for coffee after class? Let me know when you get here.">Load ham sample <span>↗</span></button>
+            </div>
+            <button class="primary-button" id="classify-button"><span>RUN CLASSIFIER</span><span class="button-arrow">→</span></button>
+            <p class="fine-print">This demo model is trained locally from the public UCI SMS dataset. It is separate from the Transformer benchmark.</p>
+          </div>
+          <div class="panel result-panel" id="prediction-panel" aria-live="polite">
+            <div class="panel-head"><div><span class="panel-kicker">MODEL OUTPUT</span><h3>Prediction trace</h3></div><span class="live-tag">LIVE</span></div>
+            <div class="empty-result" id="empty-result"><div class="empty-glyph">⌁</div><strong>Awaiting input</strong><span>Submit a message to inspect its predicted label and confidence.</span></div>
+            <div class="result-content hidden" id="result-content">
+              <div class="prediction-label"><span class="result-icon" id="result-icon">◆</span><div><small>PREDICTED CLASS</small><strong id="result-label">—</strong></div><span class="confidence-number" id="result-confidence">0%</span></div>
+              <div class="probability-row"><span>SPAM SCORE</span><strong id="spam-probability">0%</strong></div>
+              <div class="probability-track"><i id="probability-fill"></i></div>
+              <div class="trace-grid"><div><small>MODEL</small><strong>TF-IDF + LOGREG</strong></div><div><small>INFERENCE</small><strong id="inference-time">—</strong></div></div>
+              <div class="trace-note"><span>i</span><p>Confidence is a model score, not a guarantee. The benchmark below uses separately fine-tuned Transformer checkpoints.</p></div>
+            </div>
+            <div class="error-message hidden" id="prediction-error"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-block" id="benchmarks">
+        <div class="section-heading">
+          <div><div class="eyebrow"><span class="eyebrow-line"></span> EXPERIMENT / 02</div><h2>Model benchmark</h2></div>
+          <div class="section-actions"><span class="section-note">HELD-OUT TEST · N=837</span><select id="sort-models" aria-label="Sort models"><option value="f1">SORT: SPAM F1</option><option value="accuracy">SORT: ACCURACY</option><option value="parameters">SORT: SIZE</option></select></div>
+        </div>
+        <div class="panel table-panel">
+          <div class="table-toolbar"><div><span class="panel-kicker">MATCHED STRATIFIED SPLIT</span><p>70% train · 15% validation · 15% test · spam is positive</p></div><span class="split-badge">SEED 42 <span>●</span></span></div>
+          <div class="table-scroll"><table>
+            <thead><tr><th>MODEL</th><th>FAMILY</th><th>ACCURACY</th><th>PRECISION</th><th>RECALL</th><th>SPAM F1</th><th>PARAMS</th></tr></thead>
+            <tbody id="model-rows"><tr><td colspan="7" class="loading-row">LOADING BENCHMARK DATA…</td></tr></tbody>
+          </table></div>
+          <div class="table-foot"><span>◉ TEST RESULTS FROM THE SUPPLIED COLAB T4 RUN</span><span>FP32 MEMORY ESTIMATES EXCLUDED</span></div>
+        </div>
+        <div class="visual-grid">
+          <figure class="panel visual-card"><figcaption><span class="panel-kicker">01 / ACCURACY</span><strong>Held-out test accuracy</strong></figcaption><img src="/static/assets/accuracy_comparison.png" alt="Accuracy comparison across eight models"></figure>
+          <figure class="panel visual-card"><figcaption><span class="panel-kicker">02 / LEARNING</span><strong>Training and validation loss</strong></figcaption><img src="/static/assets/loss_curves.png" alt="Training and validation loss curves for eight models"></figure>
+          <figure class="panel visual-card"><figcaption><span class="panel-kicker">03 / ERRORS</span><strong>Confusion matrices</strong></figcaption><img src="/static/assets/confusion_matrices.png" alt="Test-set confusion matrices for eight models"></figure>
+        </div>
+        <p class="method-note"><b>READOUT</b> Accuracy is high across models, but class balance matters: spam precision, recall, and F1 show the missed-spam / false-alarm tradeoff. Historical Assignment 2 scores used a different split and are excluded from this matched-split table.</p>
+      </section>
+
+      <section class="section-block dataset-section" id="your-data">
+        <div class="section-heading">
+          <div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR EXPERIMENT / 03</div><h2>Bring a labeled dataset</h2></div>
+          <span class="section-note">BINARY TEXT CLASSIFICATION</span>
+        </div>
+        <div class="upload-grid">
+          <div class="panel upload-panel">
+            <div class="upload-symbol">⇧</div><div class="upload-copy"><h3>Evaluate your CSV</h3><p>Train a fresh TF-IDF + Logistic Regression baseline and score it on a stratified holdout.</p></div>
+            <label class="file-drop" for="csv-input"><span class="file-icon">▤</span><span><strong>Choose CSV file</strong><small>Minimum 20 labeled rows · maximum 2 MB</small></span><span class="file-arrow">↗</span><input id="csv-input" type="file" accept=".csv,text/csv"></label>
+            <div class="csv-format"><span class="panel-kicker">EXPECTED COLUMNS</span><code>text,label</code><small>“message” and “class” also work. Use exactly two label values.</small></div>
+            <a class="sample-download" href="/static/assets/starter_binary_text.csv" download>DOWNLOAD STARTER CSV <span>↓</span></a>
+            <button class="secondary-button" id="evaluate-button" disabled>RUN HOLDOUT EVALUATION <span>→</span></button>
+            <div class="upload-error hidden" id="upload-error"></div>
+          </div>
+          <div class="panel upload-result" id="evaluation-result">
+            <div class="panel-head"><div><span class="panel-kicker">EVALUATION OUTPUT</span><h3 id="eval-title">Ready when you are</h3></div><span class="panel-icon">▦</span></div>
+            <div class="eval-empty" id="eval-empty"><span class="empty-glyph">◌</span><p>Upload labeled text to see accuracy, positive-class precision / recall / F1, and the confusion matrix.</p></div>
+            <div class="eval-content hidden" id="eval-content"></div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer-bar"><span><span class="brand-mini">◈</span> SIGNAL LAB <i>·</i> A SMALL, OPEN NLP EVALUATION WORKSPACE</span><span>DATASET: UCI SMS SPAM COLLECTION <i>·</i> 2011</span></footer>
+    </main>
+  </div>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>
